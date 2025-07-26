@@ -77,4 +77,15 @@ public class UserController {
                 .build();
         return new ResponseEntity<>(finalDTO, HttpStatus.OK);
     }
+
+    @PostMapping("/loginUser")
+    public ResponseEntity authenticateUser(@RequestBody RequestUserDTO requestUserDTO) {
+        Object data = userService.authenticateUser(requestUserDTO.getName(),
+                requestUserDTO.getPassword());
+        FinalDTO finalDTO = FinalDTO.builder()
+                .status(HttpStatus.OK.value())
+                .data(data)
+                .build();
+        return new ResponseEntity<>(finalDTO, HttpStatus.OK);
+    }
 }
