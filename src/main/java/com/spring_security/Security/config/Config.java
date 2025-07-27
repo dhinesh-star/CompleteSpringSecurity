@@ -29,7 +29,7 @@ public class Config {
                 .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("roles/save").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/getUsers","/users/saveWithRole").hasRole("ADMIN")
-                .requestMatchers("/user/save", "/error", "/loginUser").permitAll()
+                .requestMatchers("/user/save", "/error", "/loginUser", "/getTokens", "/getTokensUsingBody").permitAll()
         );
 
 //        http.csrf(csrf -> csrf.disable())

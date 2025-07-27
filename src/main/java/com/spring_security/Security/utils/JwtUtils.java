@@ -18,9 +18,20 @@ public class JwtUtils {
                 .claim("username", userName)
                 .claim("authorities", grantedAuthorityList.stream().collect(Collectors.joining(",")))
                 .issuedAt(new Date())
-                .expiration(new Date((new Date()).getTime() + 60 * 60 * 1000))
+                .expiration(new Date((new Date()).getTime() + 60 * 60 * 1000)) // Expiration after 1 hr
                 .signWith(secretKey).compact();
         return accessToken;
+    }
+
+    public static String getRefreshToken(String issuer, String userName, String jwtSecret) {
+        SecretKey secretKey = getSecretKey(jwtSecret);
+        String refreshToken = Jwts.builder().issuer(issuer)
+                .subject("JWT Refresh Token")
+                .claim("username", userName)
+                .issuedAt(new Date())
+                .expiration(new Date((new Date()).getTime() + 24 * 60 * 60 * 1000)) // Expiration after 24 hr
+                .signWith(secretKey).compact();
+        return refreshToken;
     }
 
     public static SecretKey getSecretKey(String jwtSecret) {

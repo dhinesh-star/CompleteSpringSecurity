@@ -55,6 +55,7 @@ public class JwtValidatorFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return request.getServletPath().equalsIgnoreCase("/loginUser") || request.getServletPath().equalsIgnoreCase("/user/save");
+        return request.getServletPath().equalsIgnoreCase("/loginUser") || request.getServletPath().equalsIgnoreCase("/user/save")
+                || request.getServletPath().equalsIgnoreCase("/getTokens") || request.getServletPath().equalsIgnoreCase("/getTokensUsingBody");
     }
 }
